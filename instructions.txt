@@ -1,0 +1,31 @@
+Setup AWS Lambda Code
+
+1) Restore Node.JS packages used in the app (google-spreadsheet).
+	- Install Node.JS from https://nodejs.org
+	- Run npm install inside lambda folder
+
+2) Archive app.js, creds.json and node_modules folder in a .zip file.
+
+3) Create a new AWS Lambda function.
+	- Skip Step 1 (Select blueprint)
+	- Enter Function name
+	- Select "Node.js" as "Runtime"
+	- Select "Upload a .zip file" as the code entry type
+	- Upload the .zip from Step 2
+	- Enter "app.handler" as the "Handler"
+	- Select "basic execution role" as the "Role"
+	- Enter "128" as "Memory (MB)"
+	- Enter "30 seconds" as "Timeout" (Function currently generally runs under 10 seconds)
+	- Finish wizard
+	
+4) Add Event Source to run AWS Lambda function every 15 minutes.
+	- Click Event sources tab from the function details page
+	- Click Add event sources link
+	- Select "Scheduled Event" as the "Event Source type"
+	- Enter Schedule name
+	- Select "rate(15 minutes)" as the "Schedule expression"
+	- Enable event source
+	- Finish wizard
+
+ 
+
