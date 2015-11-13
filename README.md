@@ -9,4 +9,4 @@ This script runs on a schedule and populates a Google Spreadsheet with numbers f
 * active auctions
 * members online
 
-and presents them in a chart [here]
+and presents them in a chart [here](http://jsfiddle.net/cubski/crhazL7o/1/)
