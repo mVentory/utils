@@ -17,8 +17,6 @@ function showCharts() {
 			membersOnlineTable.addColumn('datetime', 'DateTime');
 			membersOnlineTable.addColumn('number', 'Active Listings');
 			
-			var data = [];
-
 			var result = response.raw.table;
 			for (var i = 0; i < result.rows.length; i++) {
 				var row = result.rows[i];
