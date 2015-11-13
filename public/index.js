@@ -15,7 +15,7 @@ function showCharts() {
 			
 			var membersOnlineTable = new google.visualization.DataTable();
 			membersOnlineTable.addColumn('datetime', 'DateTime');
-			membersOnlineTable.addColumn('number', 'Active Listings');
+			membersOnlineTable.addColumn('number', 'Members Online');
 			
 			var result = response.raw.table;
 			for (var i = 0; i < result.rows.length; i++) {
