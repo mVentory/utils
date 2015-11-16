@@ -4,7 +4,7 @@ var GoogleSpreadsheet = require("google-spreadsheet");
 var config = {
 	credentialPath: "./creds.json",
 	siteUrl: "https://api.trademe.co.nz/v1/SiteStats.json",
-	sheetId: "1PvLp6O5NLeXZW00l79PXL0Zqcy3ysAocmBmX7tKTPPU",
+	sheetId: "1RMcibAPjuPim7N_MUFdVeYqiN_ngroNrQzsHy6VDwB4",
 	sheetTitle: "Main"
 };
 
