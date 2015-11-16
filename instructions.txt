@@ -27,5 +27,29 @@ Setup AWS Lambda Code
 	- Enable event source
 	- Finish wizard
 
- 
 
+Generating Google Sheet JSON Key File
+
+1) Go to the Google Developers Console (https://console.developers.google.com/project)
+2) Select your project or create a new one (and then select it)
+3) Enable the Drive API for your project
+	- In the sidebar on the left, expand APIs & auth > APIs
+	- Search for "drive"
+	- Click on "Drive API"
+	- Click the blue "Enable API" button
+4) Create a service account for your project
+	- In the sidebar on the left, expand APIs & auth > Credentials
+	- Click "Create new Client ID" button
+	- Select the "Service account" option
+	- Click "Create Client ID" button to continue
+	- When the dialog appears click "Okay, got it"
+	- Your JSON key file is generated and downloaded to your machine
+5) Use the the generated JSON key file
+	- Place the file inside the lambda folder
+	- Rename it to creds.json or any filename as long as it matches config.credentialsPath in lambda/app.js
+
+Notes:
+
+- You need to set the spread sheet to be editable for the Lambda Function to write data to it, sharing it as "Anyone with the link can EDIT" should be enough (no need to publish to web)
+- To use test sample chart project, you have to replace the URL in sample/index.js (including gid parameter)
+- The Lamda Function uses google-spreadsheet module, details on how to generate the JSON key file can be found there (https://www.npmjs.com/package/google-spreadsheet)
