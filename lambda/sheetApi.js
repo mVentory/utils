@@ -10,8 +10,6 @@ function SheetApi() {
 	this.tokens = 0;
 	this.parser = new xml2js.Parser({ explicitArray: false, explicitRoot: false });
 
-	self.tokens++;
-
 	this.authenticate = function (creds, callback) {
 		var client = new google.auth.JWT(creds.client_email, null, creds.private_key, GOOGLE_AUTH_SCOPE, creds.user_email);
 		client.authorize(function (err, tokens) {
