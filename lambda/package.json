@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "google-spreadsheet": "*"
+    "googleapis": "*",
+    "xml2js": "*"
   }
 }

@@ -47,6 +47,7 @@ Generating Google Sheet JSON Key File
 5) Use the the generated JSON key file
 	- Place the file inside the lambda folder
 	- Rename it to creds.json or any filename as long as it matches config.credentialsPath in lambda/app.js
+6) Add "user_email" key with value of the email address used to generate the JSON key file (creds.json)
 
 Notes:
 

@@ -1,62 +1,48 @@
-var https = require("https");
-var GoogleSpreadsheet = require("google-spreadsheet");
+var sheetApi = require("./sheetApi");
+var siteApi = require("./siteApi");
 
 var config = {
-	credentialPath: "./creds.json",
-	siteUrl: "https://api.trademe.co.nz/v1/SiteStats.json",
-	sheetId: "1RMcibAPjuPim7N_MUFdVeYqiN_ngroNrQzsHy6VDwB4",
-	sheetTitle: "Main"
+	spreadsheetId: "1PvLp6O5NLeXZW00l79PXL0Zqcy3ysAocmBmX7tKTPPU",
+	credentialPath: "./creds.json"
 };
 
 exports.handler = function (event, context) {
-	var req = https.get(config.siteUrl, function (res) {
-		if (res.statusCode == 200) {
-			var body = '';
-			res.on('data', function (chunk) {
-				body += chunk;
-			});
-			res.on('end', function () {
-				console.log("Site Stats: " + body);
-				var stats = JSON.parse(body);
 
-				console.log("Connecting to Spreadsheet ID: " + config.sheetId);
-				var spreadsheet = new GoogleSpreadsheet(config.sheetId);
+	console.log("Retrieving site stats...")
+	siteApi.getSiteStats(function (err, data) {
+		if (err) context.fail(err);
 
-				var creds = require(config.credentialPath);
-				spreadsheet.useServiceAccountAuth(creds, function (error) {
-					if (error) context.fail(error);
-					spreadsheet.getInfo(function (error, sheetInfo) {
-						if (error) context.fail(error);
+		var siteStats = data;
 
-						//Use the worksheet with the same title as config.sheetTitle, when no match is found use the first worksheet
-						var worksheetIndex = 0;
-						sheetInfo.worksheets.some(function (value, index) {
-							if (value.title == config.sheetTitle) {
-								worksheetIndex = index;
-								return true;
-							}
-						});						
-						var worksheet = sheetInfo.worksheets[worksheetIndex];
+		console.log("Authenticating...");
+		sheetApi.authenticate(require(config.credentialPath), function (err) {
+			if (err) context.fail(err);
 
-						//Format updatedOn datetime
-						var dt = new Date();
-						var updatedOn = dt.getUTCFullYear() + "-" + (dt.getUTCMonth() + 1) + "-" + dt.getUTCDate() + " " + dt.getUTCHours() + ":" + dt.getUTCMinutes() + ":" + dt.getUTCSeconds();
+			console.log("Retrieving worksheets from spreadsheet #" + config.spreadsheetId);
+			sheetApi.getWorksheets(config.spreadsheetId, function (err, data) {
+				if (err) context.fail(err);
 
-						worksheet.addRow({
-							"Active Members": stats.ActiveMembers,
-							"Active Listings": stats.ActiveListings,
-							"Members Online": stats.MembersOnline,
-							"Updated On": updatedOn
-						}, function (error) {
-							if (error) context.fail(error);
-							context.succeed();
-						});
-					});
+				var worksheet;
+				if (data.entry.constructor === Array) {
+					worksheet = data.entry[0];
+				} else {
+					worksheet = data.entry;
+				}
+
+				var worksheetId = worksheet.id.substring(worksheet.id.lastIndexOf("/") + 1);
+
+				var dt = new Date();
+				var updatedOn = dt.getUTCFullYear() + "-" + (dt.getUTCMonth() + 1) + "-" + dt.getUTCDate() + " " + dt.getUTCHours() + ":" + dt.getUTCMinutes() + ":" + dt.getUTCSeconds();
+
+				var rowData = [siteStats.ActiveMembers, siteStats.ActiveListings, siteStats.MembersOnline, updatedOn];
+
+				console.log("Add rows to spreadsheet #" + config.spreadsheetId + " worksheet #" + worksheetId + ": " + JSON.stringify(rowData));
+				sheetApi.addRows(config.spreadsheetId, worksheetId, rowData, function (err, data) {
+					if (err) context.fail(err);
+					context.succeed();
 				});
 			});
-		}
-		else context.fail(config.siteUrl + " - " + res.statusCode);
+		});
 	});
-	req.on("error", context.fail);
-	req.end();
+
 }
