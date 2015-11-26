@@ -51,6 +51,5 @@ Generating Google Sheet JSON Key File
 
 Notes:
 
-- You need to set the spread sheet to be editable for the Lambda Function to write data to it, sharing it as "Anyone with the link can EDIT" should be enough (no need to publish to web)
+- You need to share the spreadsheet as "Anyone with the link CAN VIEW" so the sample chart project can read the data from the spreadsheet. Take note that this does not give anyone permission to edit the spreadsheet, even if they reconstruct or have access to the spreadsheet link, they won't be able to tamper the data.
 - To use test sample chart project, you have to replace the URL in sample/index.js (including gid parameter)
-- The Lamda Function uses google-spreadsheet module, details on how to generate the JSON key file can be found there (https://www.npmjs.com/package/google-spreadsheet)
