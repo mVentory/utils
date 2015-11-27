@@ -1,14 +1,10 @@
 function showCharts() {
 	sheetrock({
-		url: "https://docs.google.com/spreadsheets/d/1PvLp6O5NLeXZW00l79PXL0Zqcy3ysAocmBmX7tKTPPU/edit#gid=1589666536", // Public Google Spreadsheet Url
+		url: "https://docs.google.com/spreadsheets/d/1PdirS7R4hea3G-A86c91xl-9yeLpTQm-7NFSluc7ulM#gid=0", // Public Google Spreadsheet Url
 		query: "select D, A, B, C", //column D = Updated On, column A = Active Members, column B = Active Listings, column C = Members Online
 		callback: function (error, options, response) {
 			if (!response) return;
 
-			var activeMembersTable = new google.visualization.DataTable();
-			activeMembersTable.addColumn('datetime', 'DateTime');
-			activeMembersTable.addColumn('number', 'Active Members');
-			
 			var activeListingsTable = new google.visualization.DataTable();
 			activeListingsTable.addColumn('datetime', 'DateTime');
 			activeListingsTable.addColumn('number', 'Active Listings');
@@ -22,11 +18,9 @@ function showCharts() {
 				var row = result.rows[i];
 				
 				var datetime = new Date(row.c[0].f);
-				var activeMembers = row.c[1].v;
 				var activeListings = row.c[2].v;
 				var membersOnline = row.c[3].v;
 				
-				activeMembersTable.addRow([datetime, activeMembers]);
 				activeListingsTable.addRow([datetime, activeListings]);
 				membersOnlineTable.addRow([datetime, membersOnline]);
 			}
@@ -43,10 +37,6 @@ function showCharts() {
 				}
 			};
 
-			options.title = "Active Members";
-			var chart = new google.visualization.LineChart(document.getElementById('active_members_chart'));
-			chart.draw(activeMembersTable, options);
-			
 			options.title = "Active Listings";
 			chart = new google.visualization.LineChart(document.getElementById('active_listings_chart'));
 			chart.draw(activeListingsTable, options);

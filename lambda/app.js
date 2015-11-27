@@ -2,7 +2,7 @@ var sheetApi = require("./sheetApi");
 var siteApi = require("./siteApi");
 
 var config = {
-	spreadsheetId: "1PvLp6O5NLeXZW00l79PXL0Zqcy3ysAocmBmX7tKTPPU",
+	spreadsheetId: "1PdirS7R4hea3G-A86c91xl-9yeLpTQm-7NFSluc7ulM",
 	credentialPath: "./creds.json"
 };
 

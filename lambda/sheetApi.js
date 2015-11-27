@@ -11,7 +11,7 @@ function SheetApi() {
 	this.parser = new xml2js.Parser({ explicitArray: false, explicitRoot: false });
 
 	this.authenticate = function (creds, callback) {
-		var client = new google.auth.JWT(creds.client_email, null, creds.private_key, GOOGLE_AUTH_SCOPE, creds.user_email);
+		var client = new google.auth.JWT(creds.client_email, null, creds.private_key, GOOGLE_AUTH_SCOPE, creds.client_email);
 		client.authorize(function (err, tokens) {
 			self.tokens = tokens;
 			callback(err);

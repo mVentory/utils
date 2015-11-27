@@ -1,4 +1,12 @@
-Setup AWS Lambda Code
+# TradeMe Traffic Tracker
+
+This Node.js app logs TradeMe traffic from https://api.trademe.co.nz/v1/SiteStats.xml into a Google Docs spreadsheet. The data then can be presented in a diagram for visualisation.
+
+Raw data spreadsheet: https://docs.google.com/spreadsheets/d/1PdirS7R4hea3G-A86c91xl-9yeLpTQm-7NFSluc7ulM
+
+Diagrams: http://mventory.com/articles/trademe-traffic-traker/
+
+## Setup AWS Lambda Code
 
 1) Restore Node.JS packages used in the app (google-spreadsheet).
 	- Install Node.JS from https://nodejs.org
@@ -28,7 +36,7 @@ Setup AWS Lambda Code
 	- Finish wizard
 
 
-Generating Google Sheet JSON Key File
+## Generating Google credentials
 
 1) Go to the Google Developers Console (https://console.developers.google.com/project)
 2) Select your project or create a new one (and then select it)
@@ -47,10 +55,27 @@ Generating Google Sheet JSON Key File
 5) Use the the generated JSON key file
 	- Place the file inside the lambda folder
 	- Rename it to creds.json or any filename as long as it matches config.credentialsPath in lambda/app.js
-6) Add "user_email" key with value of the email address used to generate the JSON key file (creds.json)
 
-Notes:
+## Google Spreadsheet Credentials
 
-- You need to set the spread sheet to be editable for the Lambda Function to write data to it, sharing it as "Anyone with the link can EDIT" should be enough (no need to publish to web)
-- To use test sample chart project, you have to replace the URL in sample/index.js (including gid parameter)
+1) Create a new spreadsheet document:
+    - the name of the sheet is unimportant
+    - rename the first sheet from `Sheet1` to `Main`
+    - use the following columns `Active Members`,`Active Listings`,`Members Online`,`Updated On`
+    - set default sharing to `Anyone with the link can view` for the chart script to access it
+    - share the document with the service account email with `Can edit` permissions
+
+## Charts example
+
+1) Copy the HTML from _sample/index.html_ into your web page
+2) Replace the URL in _sample/trademe-tracker-chart.js_ (including gid parameter) to point your spreadsheet with the TM data.
+3) Remove comments, white space and line breaks in the script embeded into the HTML page if pasting into WordPress to avoid <p> tas inserted by the HTML editor and breaking your script.
+
+
+## _Notes_
+
 - The Lamda Function uses google-spreadsheet module, details on how to generate the JSON key file can be found there (https://www.npmjs.com/package/google-spreadsheet)
+
+## Credits
+
+- big thanks to Carl (@cubski) for making this tracker possible and putting an extra effort with the access control and Google API.
