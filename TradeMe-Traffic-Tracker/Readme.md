@@ -78,9 +78,4 @@ Diagrams: http://mventory.com/articles/trademe-traffic-traker/
 
 ## Credits
 
-<<<<<<< HEAD:instructions.md
 - big thanks to Carl (@cubski) for making this tracker possible and putting an extra effort with the access control and Google API.
-=======
-- You need to share the spreadsheet as "Anyone with the link CAN VIEW" so the sample chart project can read the data from the spreadsheet. Take note that this does not give anyone permission to edit the spreadsheet, even if they reconstruct or have access to the spreadsheet link, they won't be able to tamper the data.
-- To use test sample chart project, you have to replace the URL in sample/index.js (including gid parameter)
->>>>>>> origin/master:instructions.txt
