@@ -1,7 +1,7 @@
 # mVentory Utils
 Miscellaneous utilities for work and for pleasure
 
-## TradeMe Watch
+## TradeMe Traffic Tracker
 
 This script runs on a schedule and populates a Google Spreadsheet with numbers from public TradeMe stats: 
 
@@ -9,4 +9,4 @@ This script runs on a schedule and populates a Google Spreadsheet with numbers f
 * active auctions
 * members online
 
-and presents them in a chart [here](http://jsfiddle.net/cubski/crhazL7o/1/)
+and presents them in a this [busiest TradeMe time](http://mventory.com/articles/trademe-traffic-traker/) chart.
