@@ -1,3 +1,4 @@
+var moment = require("moment-timezone");
 var sheetApi = require("./sheetApi");
 var siteApi = require("./siteApi");
 
@@ -31,8 +32,7 @@ exports.handler = function (event, context) {
 
 				var worksheetId = worksheet.id.substring(worksheet.id.lastIndexOf("/") + 1);
 
-				var dt = new Date();
-				var updatedOn = dt.getUTCFullYear() + "-" + (dt.getUTCMonth() + 1) + "-" + dt.getUTCDate() + " " + dt.getUTCHours() + ":" + dt.getUTCMinutes() + ":" + dt.getUTCSeconds();
+				var updatedOn = moment().tz("Pacific/Auckland").format("MM/DD/YYYY hh:mm:ss");
 
 				var rowData = [siteStats.ActiveMembers, siteStats.ActiveListings, siteStats.MembersOnline, updatedOn];
 

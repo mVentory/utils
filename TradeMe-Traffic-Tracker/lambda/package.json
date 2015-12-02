@@ -9,7 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "googleapis": "*",
-    "xml2js": "*"
+    "googleapis": "^2.1.6",
+    "moment-timezone": "^0.4.1",
+    "xml2js": "^0.4.15"
   }
 }
