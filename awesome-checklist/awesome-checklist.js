@@ -23,8 +23,7 @@ var AwesomeCookie = Cookies.noConflict();
     $( document ).ready(
         function () {
             // @TODO: need to make dynamic selector rather than "article li"
-            // ul.mvchecklist
-            $( "article li" ).each(
+            $( "ul.mvchecklist" ).each(
                 function () {
                     $( this ).prepend(
                         checklist(
