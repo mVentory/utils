@@ -14,16 +14,10 @@ function awesome_checklist_js()
 {
     global $post;
 
-    // load js cookie library
-    wp_enqueue_script(
-        "js.cookies",
-        plugin_dir_url( __FILE__ ) . 'assets/js/js.cookie.js'
-    );
-
     // registering app js
     wp_register_script(
         'awesome-checklist.js',
-        plugin_dir_url( __FILE__ ) . 'awesome-checklist.js',
+        plugin_dir_url( __FILE__ ) . 'scripts.js',
         array( 'jquery' )
     );
 
