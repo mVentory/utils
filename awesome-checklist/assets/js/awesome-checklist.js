@@ -7,7 +7,6 @@ var AwesomeCookie = Cookies.noConflict();
 (function ( $ ) {
     function checklist( id ) {
         if ( id != undefined ) {
-            // var checkboxId   = "chk-" + id + "-" + awesome_checklist_var.postId;
             var checkboxId   = "chk-" + id;
             var checked      = false;
             var checkedClass = "";
