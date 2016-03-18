@@ -7,7 +7,8 @@ var AwesomeCookie = Cookies.noConflict();
 (function ( $ ) {
     function checklist( id ) {
         if ( id != undefined ) {
-            var checkboxId   = "check-" + id + "-" + awesome_checklist_var.postId;
+            // var checkboxId   = "chk-" + id + "-" + awesome_checklist_var.postId;
+            var checkboxId   = "chk-" + id;
             var checked      = false;
             var checkedClass = "";
 
@@ -15,7 +16,7 @@ var AwesomeCookie = Cookies.noConflict();
                 checked      = "checked";
                 checkedClass = "mvcheckliston";
             }
-            return "<input type='checkbox' class='awesome-checklist-li " + checkedClass + "' id='" + checkboxId + "' " + checked + ">";
+            return "<input type='checkbox' value='1' class='awesome-checklist-li " + checkedClass + "' id='" + checkboxId + "' " + checked + ">";
         }
     }
 
@@ -37,19 +38,24 @@ var AwesomeCookie = Cookies.noConflict();
     // create the cookies
     $( document ).on(
         'change', ".awesome-checklist-li", function () {
-            var id = $( this ).attr( 'id' );
+            var id    = $( this ).attr( 'id' );
             var value = $( this ).prop( 'checked' );
 
             if ( value ) {
                 AwesomeCookie.set(
-                    id, value, {
-                        expires : 365
+                    id, 1, {
+                        expires : 365,
+                        path :    awesome_checklist_var.url
                     }
                 );
                 $( this ).addClass( 'mvcheckliston' );
             }
             else {
-                AwesomeCookie.remove( id );
+                AwesomeCookie.remove(
+                    id, {
+                        path : awesome_checklist_var.url
+                    }
+                );
                 $( this ).removeClass( 'mvcheckliston' )
             }
         }
