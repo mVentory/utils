@@ -43,7 +43,9 @@ This is a non-checklist because it DOESN'T have class="mvchecklist"
 </ul>
 ```
 
+## Notes
 
+If a checklist shows up in an excerpt on a category page there is a chance that it is in the parent parth of the post itself and if a checkbox is set there it will be set in any post it is used in because of the cookie path. Not sure if it's a bug or a feature.
 
 
 
