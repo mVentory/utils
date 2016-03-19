@@ -26,7 +26,8 @@ function awesome_checklist_js()
         'awesome-checklist.js',
         'awesome_checklist_var',
         array(
-            "postId" => $post->ID
+            "postId" => $post->ID,
+            "url"    => $_SERVER[ 'REQUEST_URI' ]
         )
     );
 
